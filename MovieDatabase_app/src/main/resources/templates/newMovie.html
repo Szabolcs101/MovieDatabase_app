@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <title>Add New Movie</title>
+  <style>
+    .custom-bg {
+      background-color: DarkGray;
+    }
+  </style>
+</head>
+<body class="custom-bg">
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">AniList</a>
+    <i class="bi bi-film"></i>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">My Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" th:href="@{/moviePage}">Movies</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Series</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            My Lists
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Completed Movies</a></li>
+            <li><a class="dropdown-item" href="#">Completed Series</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" th:href="@{/plannedPage}">Planned Movies</a></li>
+            <li><a class="dropdown-item" href="#">Planned Series</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Add
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" th:href="@{/newMovie}">Add movie</a></li>
+            <li><a class="dropdown-item" href="#">Add series</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-3">
+  <h1>Add new movie</h1>
+
+  <form th:action="@{/newMovie}" method="post" th:object="${movie}">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" class="form-control" id="title" th:field="*{title}" required>
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <input type="text" class="form-control" id="description" th:field="*{description}" required>
+    </div>
+    <div class="mb-3">
+      <label for="genre" class="form-label">Genre</label>
+      <input type="text" class="form-control" id="genre" th:field="*{genre}" required>
+    </div>
+    <div class="mb-3">
+      <label for="title" class="form-label">Characters</label>
+      <input type="text" class="form-control" id="characters" th:field="*{characters}" required>
+    </div>
+    <div class="mb-3">
+      <label for="studio" class="form-label">Studio</label>
+      <input type="text" class="form-control" id="studio" th:field="*{studio}" required>
+    </div>
+    <div class="mb-3">
+      <label for="director" class="form-label">Director</label>
+      <input type="text" class="form-control" id="director" th:field="*{director}" required>
+    </div>
+    <div class="mb-3">
+      <label for="length" class="form-label">Length</label>
+      <input type="text" class="form-control" id="length" th:field="*{length}" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+  </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
