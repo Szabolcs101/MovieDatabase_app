@@ -13,6 +13,8 @@ public interface MovieService {
 
     void addToPlanningList(Integer id);
 
+    void deleteFromPlanningList(Integer id);
+
     Movie createMovie(Movie movie);
 
     Movie updateMovie(Movie movie);

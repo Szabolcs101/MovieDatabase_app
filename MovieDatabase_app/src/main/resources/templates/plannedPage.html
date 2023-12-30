@@ -99,10 +99,11 @@
             <button type="button" class="btn btn-outline-success">Completed</button>
         </div>
         <div class="col">
-            <form th:action="@{'/deleteFromPlanned/' + ${movie.id}}" method="post">
+            <!-- <form th:action="@{'/deleteFromPlanned/' + ${movie.id}}" method="post">
                 <input type="hidden" name="_method" value="DELETE"/>
                 <button type="submit" class="btn-close" aria-label="Close"></button>
-            </form>
+            </form> -->
+            <a button type="button" class="btn-close" aria-label="Close" th:href="@{/deleteFromPlanned/{movieId}(movieId=${movie.id})}"></a>
         </div>
     </div>
 </div>

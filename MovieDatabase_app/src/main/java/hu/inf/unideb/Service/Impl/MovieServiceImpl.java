@@ -40,6 +40,15 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
+    public void deleteFromPlanningList(Integer Id){
+        Optional<Movie> optionalMovie = movieRepository.findById(Id);
+        optionalMovie.ifPresent(movie -> {
+            movie.setOnPlanned(false);
+            movieRepository.delete(movie);
+        });
+    }
+
+    @Override
     public Movie createMovie(Movie movie){
         return movieRepository.save(movie);
     }

@@ -64,12 +64,11 @@ public class MovieController {
         return "redirect:/moviePage";
     }
 
-    @PostMapping("/deleteFromPlanned/{movieId}")
+    //Should use @DeleteMapping but it's not working
+    @GetMapping("/deleteFromPlanned/{movieId}")
     public String deleteFromPlanning(@PathVariable Integer movieId){
-        Movie movie = movieServiceImpl.getMovieById(movieId);
-        movie.setOnPlanned(false);
-        movieServiceImpl.updateMovie(movie);
-        return "plannedPage";
+        movieServiceImpl.deleteFromPlanningList(movieId);
+        return "redirect:/plannedPage";
     }
 
 
