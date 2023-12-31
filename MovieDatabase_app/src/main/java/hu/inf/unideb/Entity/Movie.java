@@ -43,7 +43,7 @@ public class Movie {
     private boolean onPlanned = false;
 
     @Column(name = "onCompleted")
-    private boolean onCompleted;
+    private boolean onCompleted = false;
 
     @Override
     public String toString() {

@@ -58,7 +58,7 @@ public class MovieController {
         return "plannedPage";
     }
 
-    @PostMapping("/add-to-planning-list/{movieId}")
+    @PostMapping("/addToPlanned/{movieId}")
     public String addToPlanningList(@PathVariable Integer movieId) {
         movieServiceImpl.addToPlanningList(movieId);
         return "redirect:/moviePage";
@@ -66,9 +66,28 @@ public class MovieController {
 
     //Should use @DeleteMapping but it's not working
     @GetMapping("/deleteFromPlanned/{movieId}")
-    public String deleteFromPlanning(@PathVariable Integer movieId){
+    public String deleteFromPlanning(@PathVariable Integer movieId) {
         movieServiceImpl.deleteFromPlanningList(movieId);
         return "redirect:/plannedPage";
+    }
+
+    @GetMapping("/completedPage")
+    public String showCompletedPage(Model model) {
+        List<Movie> completedMovies = movieServiceImpl.getCompletedMovies();
+        model.addAttribute("movies", completedMovies);
+        return "completedPage";
+    }
+
+    @PostMapping("/addToCompleted/{movieId}")
+    public String addToCompletedList(@PathVariable Integer movieId) {
+        movieServiceImpl.addToCompletedList(movieId);
+        return "redirect:/moviePage";
+    }
+
+    @GetMapping("/deleteFromCompleted/{movieId}")
+    public String deleteFromCompleted(@PathVariable Integer movieId) {
+        movieServiceImpl.deleteFromCompletedList(movieId);
+        return "redirect:/completedPage";
     }
 
 

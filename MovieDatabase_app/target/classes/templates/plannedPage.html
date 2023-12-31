@@ -24,7 +24,7 @@
         }
     </style>
 </head>
-<body class="custom-bg" style="background-color:DarkGrey;">
+<body class="custom-bg" style="background-color:#36454F;">
 <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">AniList</a>
@@ -48,7 +48,7 @@
                         My Lists
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Completed Movies</a></li>
+                        <li><a class="dropdown-item" th:href="@{/completedPage}">Completed Movies</a></li>
                         <li><a class="dropdown-item" href="#">Completed Series</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" th:href="@{/plannedPage}">Planned Movies</a></li>

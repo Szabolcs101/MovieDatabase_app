@@ -26,6 +26,8 @@ public class MovieDTO {
 
     private boolean onPlanned = false;
 
+    private boolean onCompleted = false;
+
     public static MovieDTO fromEntity(Movie movie){
         return MovieDTO.builder()
                 .id(movie.getId())
@@ -37,6 +39,7 @@ public class MovieDTO {
                 .director(movie.getDirector())
                 .length(movie.getLength())
                 .onPlanned(movie.isOnPlanned())
+                .onCompleted(movie.isOnCompleted())
                 .build();
     }
 
@@ -51,6 +54,7 @@ public class MovieDTO {
                 .director(movieDTO.getDirector())
                 .length(movieDTO.getLength())
                 .onPlanned(movieDTO.isOnPlanned())
+                .onCompleted(movieDTO.isOnCompleted())
                 .build();
     }
 }

@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Integer> {
     List<Movie> findByOnPlanned(boolean onPlanned);
+    List<Movie> findByOnCompleted(boolean onCompleted);
+
 }

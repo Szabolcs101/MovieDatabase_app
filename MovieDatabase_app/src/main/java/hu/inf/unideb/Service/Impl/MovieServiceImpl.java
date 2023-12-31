@@ -24,6 +24,9 @@ public class MovieServiceImpl implements MovieService {
     public List<Movie> getPlannedMovies() {return movieRepository.findByOnPlanned(true);}
 
     @Override
+    public List<Movie> getCompletedMovies() {return movieRepository.findByOnCompleted(true);}
+
+    @Override
     public Movie getMovieById(Integer id){
 
         Optional<Movie> optionalMovie = movieRepository.findById(id);
@@ -40,10 +43,28 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public void deleteFromPlanningList(Integer Id){
+    public void deleteFromPlanningList(Integer Id) {
         Optional<Movie> optionalMovie = movieRepository.findById(Id);
         optionalMovie.ifPresent(movie -> {
             movie.setOnPlanned(false);
+            movieRepository.delete(movie);
+        });
+    }
+
+    @Override
+    public void addToCompletedList(Integer Id) {
+        Optional<Movie> optionalMovie = movieRepository.findById(Id);
+        optionalMovie.ifPresent(movie -> {
+            movie.setOnCompleted(true);
+            movieRepository.save(movie);
+        });
+    }
+
+    @Override
+    public void deleteFromCompletedList(Integer Id) {
+        Optional<Movie> optionalMovie = movieRepository.findById(Id);
+        optionalMovie.ifPresent(movie -> {
+            movie.setOnCompleted(false);
             movieRepository.delete(movie);
         });
     }

@@ -14,17 +14,17 @@
             background-color: rgb(33, 37, 41);
             padding: 7px;
             text-align: center;
-            border-bottom: solid #198754;
+            border-bottom: solid #B22222;
         }
         .header {
-            border-bottom: solid #198754;
+            border-bottom: solid #B22222;
             background-color: rgb(33, 37, 41);
-            color: #198754;
+            color: #B22222;
             margin: 200px;
         }
     </style>
 </head>
-<body class="custom-bg" style="background-color:DarkGrey;">
+<body class="custom-bg" style="background-color:#36454F;">
 <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">AniList</a>
@@ -48,7 +48,7 @@
             My Lists
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Completed Movies</a></li>
+            <li><a class="dropdown-item" th:href="@{/completedPage}">Completed Movies</a></li>
             <li><a class="dropdown-item" href="#">Completed Series</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" th:href="@{/plannedPage}">Planned Movies</a></li>
@@ -80,10 +80,7 @@
     <h5>Title</h5>
   </div>
   <div class="col text-center">
-    <h5>Add to completed</h5>
-  </div>
-  <div class="col">
-    <h5>Delete from planned</h5>
+    <h5>Delete from completed</h5>
   </div>
 </div>
 
@@ -96,13 +93,7 @@
       <h5 th:text="${movie.title}" class="title">Title</h5>
     </div>
     <div class="col">
-      <button type="button" class="btn btn-outline-success">Completed</button>
-    </div>
-    <div class="col">
-      <form th:action="@{'/deleteFromPlanned/' + ${movie.id}}" method="post">
-        <input type="hidden" name="_method" value="DELETE"/>
-        <button type="submit" class="btn-close" aria-label="Close"></button>
-      </form>
+      <a button type="button" class="btn-close" aria-label="Close" th:href="@{/deleteFromCompleted/{movieId}(movieId=${movie.id})}"></a>
     </div>
   </div>
 </div>
