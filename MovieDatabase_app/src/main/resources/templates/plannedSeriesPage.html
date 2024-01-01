@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <title>Plannings</title>
+    <style>
+        .navbar {
+            margin-bottom: 150px;
+        }
+        .container {
+            background-color: rgb(33, 37, 41);
+            padding: 15px;
+            text-align: center;
+            border-bottom: solid #198754;
+        }
+        .header {
+            border: solid #198754;
+            background-color: rgb(33, 37, 41);
+            color: #198754;
+            margin: 200px;
+        }
+    </style>
+</head>
+<body class="custom-bg" style="background-color:#36454F;">
+<nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">AniList</a>
+        <i class="bi bi-film"></i>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">My Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/moviePage}">Movies</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/seriesPage}">Series</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        My Lists
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" th:href="@{/completedPage}">Completed Movies</a></li>
+                        <li><a class="dropdown-item" th:href="@{/completedSeriesPage}">Completed Series</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" th:href="@{/plannedPage}">Planned Movies</a></li>
+                        <li><a class="dropdown-item" th:href="@{/plannedSeriesPage}">Planned Series</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Add
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" th:href="@{/newMovie}">Add movie</a></li>
+                        <li><a class="dropdown-item" th:href="@{/newSeries}">Add series</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="row header" style="width: 60rem; margin: 0 auto;">
+    <div class="col">
+    </div>
+    <div class="col">
+        <h5>Title</h5>
+    </div>
+    <div class="col text-center">
+        <h5>Add to completed</h5>
+    </div>
+    <div class="col">
+        <h5>Delete from planned</h5>
+    </div>
+</div>
+
+<div class="container" style="width: 60rem;" th:each="series : ${allSeries}">
+    <div class="row align-items-center">
+        <div class="col text-start">
+            <img src="/images/placeholder.jpg" class="card-img-top" alt="Series Image" style="width:50px;height:auto;">
+        </div>
+        <div class="col text-start">
+            <h5 th:text="${series.title}" class="title">Title</h5>
+        </div>
+        <div class="col">
+            <button type="button" class="btn btn-outline-success">Completed</button>
+        </div>
+        <div class="col">
+            <!-- <form th:action="@{'/deleteFromPlanned/' + ${movie.id}}" method="post">
+                <input type="hidden" name="_method" value="DELETE"/>
+                <button type="submit" class="btn-close" aria-label="Close"></button>
+            </form> -->
+            <a button type="button" class="btn-close" aria-label="Close" th:href="@{/deleteFromPlannedSeries/{seriesId}(seriesId=${series.id})}"></a>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+</body>
+</html>

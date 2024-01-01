@@ -41,7 +41,7 @@
                     <a class="nav-link active" aria-current="page" th:href="@{/moviePage}">Movies</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Series</a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/seriesPage}">Series</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -49,10 +49,10 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" th:href="@{/completedPage}">Completed Movies</a></li>
-                        <li><a class="dropdown-item" href="#">Completed Series</a></li>
+                        <li><a class="dropdown-item" th:href="@{/completedSeriesPage}">Completed Series</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" th:href="@{/plannedPage}">Planned Movies</a></li>
-                        <li><a class="dropdown-item" href="#">Planned Series</a></li>
+                        <li><a class="dropdown-item" th:href="@{/plannedSeriesPage}">Planned Series</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -61,7 +61,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" th:href="@{/newMovie}">Add movie</a></li>
-                        <li><a class="dropdown-item" href="#">Add series</a></li>
+                        <li><a class="dropdown-item" th:href="@{/newSeries}">Add series</a></li>
                     </ul>
                 </li>
             </ul>
