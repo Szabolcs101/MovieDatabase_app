@@ -13,6 +13,8 @@ public interface SeriesService {
 
     List<Series> getCompletedSeries();
 
+    List<Series> getWatchedSeries();
+
     Series getSeriesById(Integer id);
 
     void addToPlanningList(Integer id);
@@ -23,9 +25,11 @@ public interface SeriesService {
 
     void deleteFromCompletedList(Integer id);
 
-    void addToWatchingList(Integer id);
+    void addToWatchedList(Integer id);
 
-    void deleteFromWatchingList(Integer id);
+    void deleteFromWatchedList(Integer id);
+
+    void increaseWatchedEpisodes(Integer id);
 
     Series createSeries(Series series);
 

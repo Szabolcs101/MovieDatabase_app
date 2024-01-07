@@ -27,11 +27,13 @@ public class SeriesDTO {
 
     private String length;
 
-    private String episodes;
+    private Integer episodes;
+
+    private Integer watchedEpisodes = 0;
 
     private boolean onPlanned = false;
 
-    private boolean onWatching = false;
+    private boolean onWatched = false;
 
     private boolean onCompleted = false;
 
@@ -46,8 +48,9 @@ public class SeriesDTO {
                 .director(series.getDirector())
                 .length(series.getLength())
                 .episodes(series.getEpisodes())
+                .watchedEpisodes(series.getWatchedEpisodes())
                 .onPlanned(series.isOnPlanned())
-                .onWatching(series.isOnWatching())
+                .onWatched(series.isOnWatched())
                 .onCompleted(series.isOnCompleted())
                 .build();
     }
@@ -63,8 +66,9 @@ public class SeriesDTO {
                 .director(seriesDTO.getDirector())
                 .length(seriesDTO.getLength())
                 .episodes(seriesDTO.getEpisodes())
+                .watchedEpisodes(seriesDTO.getWatchedEpisodes())
                 .onPlanned(seriesDTO.isOnPlanned())
-                .onWatching(seriesDTO.isOnWatching())
+                .onWatched(seriesDTO.isOnWatched())
                 .onCompleted(seriesDTO.isOnCompleted())
                 .build();
     }

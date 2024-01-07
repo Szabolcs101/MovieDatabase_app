@@ -49,6 +49,8 @@
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" th:href="@{/plannedPage}">Planned Movies</a></li>
                         <li><a class="dropdown-item" th:href="@{/plannedSeriesPage}">Planned Series</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" th:href="@{/watchedSeriesPage}">Watched Series</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -75,10 +77,11 @@
                 <div class="card mb-4 box-shadow">
                     <img th:src="@{/images/placeholder.jpg}" class="card-img-top" alt="Movie Image" width="100" height="250">
                     <div class="card-body">
-                        <a th:href="@{/movie/{movieId}(movieId=${movie.id})}">
-                            <h5 th:text="${movie.title}" class="card-title"></h5>
-                        </a>
+                        <h5 th:text="${movie.title}" class="card-title"></h5>
                         <p th:text="${#strings.length(movie.description) > 150 ? #strings.substring(movie.description, 0, 150) + '...' : movie.description}" class="card-text"></p>
+                        <a th:href="@{/movie/{movieId}(movieId=${movie.id})}">
+                            <p>Bővebben...</p>
+                        </a>
                         <div class="d-flex justify-content-center">
                             <div class="btn-group">
                                 <form th:action="@{'/addToPlanned/' + ${movie.id}}" method="post">

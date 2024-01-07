@@ -17,7 +17,6 @@
         .card-body {
             height: 250px;
         }
-
     </style>
 </head>
 <body class="custom-bg">
@@ -49,6 +48,8 @@
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" th:href="@{/plannedPage}">Planned Movies</a></li>
             <li><a class="dropdown-item" th:href="@{/plannedSeriesPage}">Planned Series</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" th:href="@{/watchedSeriesPage}">Watched Series</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -75,17 +76,21 @@
       <div class="card mb-4 box-shadow">
         <img th:src="@{/images/placeholder.jpg}" class="card-img-top" alt="Series Image" width="100" height="250">
         <div class="card-body">
-          <a th:href="@{/series/{seriesId}(seriesId=${series.id})}">
-            <h5 th:text="${series.title}" class="card-title"></h5>
-          </a>
+          <h5 th:text="${series.title}" class="card-title"></h5>
           <p th:text="${#strings.length(series.description) > 150 ? #strings.substring(series.description, 0, 150) + '...' : series.description}" class="card-text"></p>
+          <a th:href="@{/series/{seriesId}(seriesId=${series.id})}">
+            <p>Bővebben...</p>
+          </a>
           <div class="d-flex justify-content-center">
             <div class="btn-group">
               <form th:action="@{'/addToPlannedSeries/' + ${series.id}}" method="post">
-                <button type="submit" class="btn btn-outline-success">Add to Planning List</button>
+                <button type="submit" class="btn btn-outline-primary">Add to Planning List</button>
               </form>
               <form th:action="@{'/addToCompletedSeries/' + ${series.id}}" method="post">
-                <button type="submit" class="btn btn-outline-success">Add to Completed List</button>
+                <button type="submit" class="btn btn-outline-primary">Add to Completed List</button>
+              </form>
+              <form th:action="@{'/addToWatchedSeries/' + ${series.id}}" method="post">
+                <button type="submit" class="btn btn-outline-primary">Add to Watched List</button>
               </form>
             </div>
           </div>

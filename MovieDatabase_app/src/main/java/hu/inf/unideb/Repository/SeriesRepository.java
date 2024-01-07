@@ -11,5 +11,5 @@ public interface SeriesRepository extends JpaRepository<Series, Integer> {
 
     List<Series> findByOnPlanned(boolean onPlanned);
     List<Series> findByOnCompleted(boolean onCompleted);
-    List<Series> findByOnWatching(boolean onWatching);
+    List<Series> findByOnWatched(boolean onWatched);
 }

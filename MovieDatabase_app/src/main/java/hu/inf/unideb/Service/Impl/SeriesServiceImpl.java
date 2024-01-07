@@ -27,6 +27,9 @@ public class SeriesServiceImpl implements SeriesService {
     }
 
     @Override
+    public List<Series> getWatchedSeries(){return seriesRepository.findByOnWatched(true);}
+
+    @Override
     public List<Series> getCompletedSeries() {
         return seriesRepository.findByOnCompleted(true);
     }
@@ -74,13 +77,31 @@ public class SeriesServiceImpl implements SeriesService {
     }
 
     @Override
-    public void addToWatchingList(Integer id) {
-
+    public void addToWatchedList(Integer id) {
+        Optional<Series> optionalSeries = seriesRepository.findById(id);
+        optionalSeries.ifPresent(series -> {
+            series.setOnWatched(true);
+            seriesRepository.save(series);
+        });
     }
 
     @Override
-    public void deleteFromWatchingList(Integer id) {
+    public void deleteFromWatchedList(Integer id) {
+        Optional<Series> optionalSeries = seriesRepository.findById(id);
+        optionalSeries.ifPresent(series -> {
+            series.setOnWatched(false);
+            seriesRepository.delete(series);
+        });
+    }
 
+    @Override
+    public void increaseWatchedEpisodes(Integer id) {
+        Series series = seriesRepository.findById(id).orElse(null);
+
+        if (series != null && series.getWatchedEpisodes() < series.getEpisodes()) {
+            series.setWatchedEpisodes(series.getWatchedEpisodes() + 1);
+            seriesRepository.save(series);
+        }
     }
 
     @Override

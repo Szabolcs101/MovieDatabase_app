@@ -6,12 +6,10 @@ import hu.inf.unideb.Entity.Movie;
 import hu.inf.unideb.Entity.Series;
 import hu.inf.unideb.Service.Impl.SeriesServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -94,6 +92,31 @@ public class SeriesController {
     public String deleteFromCompleted(@PathVariable Integer seriesId) {
         seriesServiceImpl.deleteFromCompletedList(seriesId);
         return "redirect:/completedSeriesPage";
+    }
+
+    @GetMapping("/watchedSeriesPage")
+    public String showWatchedPage(Model model) {
+        List<Series> watchedSeries = seriesServiceImpl.getWatchedSeries();
+        model.addAttribute("allSeries", watchedSeries);
+        return "watchedSeriesPage";
+    }
+
+    @PostMapping("/addToWatchedSeries/{seriesId}")
+    public String addToWatchedList(@PathVariable Integer seriesId) {
+        seriesServiceImpl.addToWatchedList(seriesId);
+        return "redirect:/seriesPage";
+    }
+
+    @GetMapping("/deleteFromWatchedSeries/{seriesId}")
+    public String deleteFromWatched(@PathVariable Integer seriesId) {
+        seriesServiceImpl.deleteFromWatchedList(seriesId);
+        return "redirect:/watchedSeriesPage";
+    }
+
+    @PostMapping("/increaseWatchedEpisodes")
+    public String increaseWatchedEpisodesForm(@RequestParam("seriesId") Integer seriesId) {
+        seriesServiceImpl.increaseWatchedEpisodes(seriesId);
+        return "redirect:/watchedSeriesPage";
     }
 
 }

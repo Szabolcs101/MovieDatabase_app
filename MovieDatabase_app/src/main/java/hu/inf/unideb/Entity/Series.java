@@ -40,13 +40,16 @@ public class Series {
     private String length;
 
     @Column(name = "EPISODES")
-    private String episodes;
+    private Integer episodes;
+
+    @Column(name = "WatchedEpisodes")
+    private Integer watchedEpisodes = 0;
 
     @Column(name = "onPlanned")
     private boolean onPlanned = false;
 
-    @Column(name = "onWatching")
-    private boolean onWatching = false;
+    @Column(name = "onWatched")
+    private boolean onWatched = false;
 
     @Column(name = "onCompleted")
     private boolean onCompleted = false;
@@ -62,9 +65,10 @@ public class Series {
                 ", studio='" + studio + '\'' +
                 ", director='" + director + '\'' +
                 ", length='" + length + '\'' +
-                ", episodes='" + episodes + '\'' +
+                ", episodes=" + episodes +
+                ", watchedEpisodes=" + watchedEpisodes +
                 ", onPlanned=" + onPlanned +
-                ", onWatching=" + onWatching +
+                ", onWatched=" + onWatched +
                 ", onCompleted=" + onCompleted +
                 '}';
     }
@@ -74,11 +78,11 @@ public class Series {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Series series = (Series) o;
-        return id == series.id && onPlanned == series.onPlanned && onWatching == series.onWatching && onCompleted == series.onCompleted && Objects.equals(title, series.title) && Objects.equals(description, series.description) && Objects.equals(genre, series.genre) && Objects.equals(characters, series.characters) && Objects.equals(studio, series.studio) && Objects.equals(director, series.director) && Objects.equals(length, series.length) && Objects.equals(episodes, series.episodes);
+        return id == series.id && onPlanned == series.onPlanned && onWatched == series.onWatched && onCompleted == series.onCompleted && Objects.equals(title, series.title) && Objects.equals(description, series.description) && Objects.equals(genre, series.genre) && Objects.equals(characters, series.characters) && Objects.equals(studio, series.studio) && Objects.equals(director, series.director) && Objects.equals(length, series.length) && Objects.equals(episodes, series.episodes) && Objects.equals(watchedEpisodes, series.watchedEpisodes);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, description, genre, characters, studio, director, length, episodes, onPlanned, onWatching, onCompleted);
+        return Objects.hash(id, title, description, genre, characters, studio, director, length, episodes, watchedEpisodes, onPlanned, onWatched, onCompleted);
     }
 }
