@@ -98,7 +98,10 @@
             <h5 th:text="${series.title}" class="title">Title</h5>
         </div>
         <div class="col">
-            <button type="button" class="btn btn-outline-success">Completed</button>
+            <!-- <button type="button" class="btn btn-outline-success">Completed</button> -->
+            <form th:action="@{'/addToCompletedSeries/' + ${series.id}}" method="post">
+                <button type="submit" class="btn btn-outline-success">Completed</button>
+            </form>
         </div>
         <div class="col">
             <!-- <form th:action="@{'/deleteFromPlanned/' + ${movie.id}}" method="post">

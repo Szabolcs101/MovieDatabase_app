@@ -6,7 +6,6 @@ import hu.inf.unideb.Service.SeriesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,7 +53,7 @@ public class SeriesServiceImpl implements SeriesService {
         Optional<Series> optionalSeries = seriesRepository.findById(id);
         optionalSeries.ifPresent(series -> {
             series.setOnPlanned(false);
-            seriesRepository.delete(series);
+            seriesRepository.save(series);
         });
     }
 
@@ -62,6 +61,7 @@ public class SeriesServiceImpl implements SeriesService {
     public void addToCompletedList(Integer id) {
         Optional<Series> optionalSeries = seriesRepository.findById(id);
         optionalSeries.ifPresent(series -> {
+            series.setOnPlanned(false);
             series.setOnCompleted(true);
             seriesRepository.save(series);
         });
@@ -72,7 +72,7 @@ public class SeriesServiceImpl implements SeriesService {
         Optional<Series> optionalSeries = seriesRepository.findById(id);
         optionalSeries.ifPresent(series -> {
             series.setOnCompleted(false);
-            seriesRepository.delete(series);
+            seriesRepository.save(series);
         });
     }
 
@@ -90,7 +90,7 @@ public class SeriesServiceImpl implements SeriesService {
         Optional<Series> optionalSeries = seriesRepository.findById(id);
         optionalSeries.ifPresent(series -> {
             series.setOnWatched(false);
-            seriesRepository.delete(series);
+            seriesRepository.save(series);
         });
     }
 

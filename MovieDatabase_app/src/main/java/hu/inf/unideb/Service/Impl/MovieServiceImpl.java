@@ -47,7 +47,7 @@ public class MovieServiceImpl implements MovieService {
         Optional<Movie> optionalMovie = movieRepository.findById(Id);
         optionalMovie.ifPresent(movie -> {
             movie.setOnPlanned(false);
-            movieRepository.delete(movie);
+            movieRepository.save(movie); //-> to update the database)
         });
     }
 
@@ -55,6 +55,7 @@ public class MovieServiceImpl implements MovieService {
     public void addToCompletedList(Integer Id) {
         Optional<Movie> optionalMovie = movieRepository.findById(Id);
         optionalMovie.ifPresent(movie -> {
+            movie.setOnPlanned(false);
             movie.setOnCompleted(true);
             movieRepository.save(movie);
         });
@@ -65,7 +66,7 @@ public class MovieServiceImpl implements MovieService {
         Optional<Movie> optionalMovie = movieRepository.findById(Id);
         optionalMovie.ifPresent(movie -> {
             movie.setOnCompleted(false);
-            movieRepository.delete(movie);
+            movieRepository.save(movie);
         });
     }
 
