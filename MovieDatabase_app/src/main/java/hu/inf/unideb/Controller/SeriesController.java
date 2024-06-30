@@ -1,12 +1,9 @@
 package hu.inf.unideb.Controller;
 
-import hu.inf.unideb.DTO.MovieDTO;
 import hu.inf.unideb.DTO.SeriesDTO;
-import hu.inf.unideb.Entity.Movie;
 import hu.inf.unideb.Entity.Series;
 import hu.inf.unideb.Service.Impl.SeriesServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

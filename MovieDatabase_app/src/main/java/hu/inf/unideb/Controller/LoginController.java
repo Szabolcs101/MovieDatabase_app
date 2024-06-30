@@ -12,7 +12,7 @@ public class LoginController {
     }
 
     @GetMapping("/register")
-    public String handleRegister() {
+    public String showRegisterPage() {
         return "custom_register";
     }
 }

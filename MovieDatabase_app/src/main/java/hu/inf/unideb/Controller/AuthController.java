@@ -4,12 +4,16 @@ import hu.inf.unideb.Entity.MyUser;
 import hu.inf.unideb.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Optional;
 
-@RestController
-public class RegistrationController {
+@Controller
+public class AuthController {
 
     @Autowired
     private UserRepository myUserRepository;
@@ -17,16 +21,32 @@ public class RegistrationController {
     private PasswordEncoder passwordEncoder;
 
     @PostMapping("/register/user")
-    public MyUser createUser(@ModelAttribute MyUser user) {
+    public ModelAndView createUser(@ModelAttribute MyUser user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole("USER");
         MyUser savedUser = myUserRepository.save(user);
         System.out.println("Saved user: " + savedUser.getUsername() + ", Password: " + savedUser.getPassword());
-        return savedUser;
+        return new ModelAndView("redirect:/login");
     }
 
     @GetMapping("/users")
-    public List<MyUser> getAllUsers() {
-        return myUserRepository.findAll();
+    public String getAllUsers(Model model) {
+        List<MyUser> users = myUserRepository.findAll();
+        model.addAttribute("users", users);
+        return "users";
+    }
+
+    @PostMapping("/users/changeRole/{id}")
+    public String changeUserRole(@PathVariable Long id, @RequestParam String newRole) {
+        Optional<MyUser> userOptional = myUserRepository.findById(id);
+        if (userOptional.isPresent()) {
+            MyUser user = userOptional.get();
+            if (newRole != null && (newRole.equals("ADMIN") || newRole.equals("USER"))) {
+                user.setRole(newRole);
+                myUserRepository.save(user);
+            }
+        }
+        return "redirect:/users";
     }
 
     // Endpoint for JSON data -> use it to testing via Postman
@@ -35,5 +55,4 @@ public class RegistrationController {
         //user.setPassword(passwordEncoder.encode(user.getPassword()));
         //return myUserRepository.save(user);
     //}
-
 }

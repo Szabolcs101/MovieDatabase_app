@@ -1,6 +1,9 @@
 package hu.inf.unideb.Config;
 
+import hu.inf.unideb.Entity.MyUser;
+import hu.inf.unideb.Repository.UserRepository;
 import hu.inf.unideb.Service.Impl.MyUserDetailService;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,6 +31,11 @@ public class SecurityConfig {
     @Autowired
     private MyUserDetailService userDetailService;
 
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, MvcRequestMatcher.Builder mvc) throws Exception {
         return httpSecurity
@@ -36,7 +44,7 @@ public class SecurityConfig {
                     registry.requestMatchers(mvc.pattern("/moviePage"), mvc.pattern("/seriesPage"), mvc.pattern("/register/**")).permitAll();
                     registry.requestMatchers(mvc.pattern("/newMovie"),  mvc.pattern("/newSeries"), mvc.pattern("/users")).hasRole("ADMIN");
                     registry.requestMatchers(mvc.pattern("/plannedPage"), mvc.pattern("/plannedSeriesPage"), mvc.pattern("/completedPage"), mvc.pattern("/completedSeriesPage"),
-                    mvc.pattern("/watchedSeriesPage")).hasRole("USER");
+                    mvc.pattern("/watchedSeriesPage")).hasAnyRole("USER", "ADMIN");
                     registry.anyRequest().authenticated();
                 })
                 .formLogin(httpSecurityFormLoginConfigurer -> {
@@ -46,6 +54,18 @@ public class SecurityConfig {
                             .permitAll();
                 })
                 .build();
+    }
+
+    @PostConstruct
+    public void createDefaultAdminUser() {
+        MyUser adminUser = new MyUser();
+        adminUser.setUsername("admin");
+        adminUser.setPassword(passwordEncoder.encode("password"));
+        adminUser.setRole("ADMIN");
+
+        if (!userRepository.findByUsername("admin").isPresent()) {
+            userRepository.save(adminUser);
+        }
     }
 
     @Bean

@@ -47,7 +47,7 @@ public class MovieServiceImpl implements MovieService {
         Optional<Movie> optionalMovie = movieRepository.findById(Id);
         optionalMovie.ifPresent(movie -> {
             movie.setOnPlanned(false);
-            movieRepository.save(movie); //-> to update the database)
+            movieRepository.save(movie);
         });
     }
 

@@ -1,6 +1,5 @@
 package hu.inf.unideb.DTO;
 
-import hu.inf.unideb.Entity.Movie;
 import hu.inf.unideb.Entity.Series;
 import lombok.*;
 
