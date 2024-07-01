@@ -9,25 +9,25 @@ public interface SeriesService {
 
     List<Series> getAllSeries();
 
-    List<Series> getPlannedSeries();
+    List<Series> getPlannedSeries(Long userId);
 
-    List<Series> getCompletedSeries();
+    List<Series> getCompletedSeries(Long userId);
 
-    List<Series> getWatchedSeries();
+    List<Series> getWatchedSeries(Long userId);
 
     Series getSeriesById(Integer id);
 
-    void addToPlanningList(Integer id);
+    void addToPlanningList(Long userId, Integer seriesId);
 
-    void deleteFromPlanningList(Integer id);
+    void deleteFromPlanningList(Long userId, Integer seriesId);
 
-    void addToCompletedList(Integer id);
+    void addToCompletedList(Long userId, Integer seriesId);
 
-    void deleteFromCompletedList(Integer id);
+    void deleteFromCompletedList(Long userId, Integer seriesId);
 
-    void addToWatchedList(Integer id);
+    void addToWatchedList(Long userId, Integer seriesId);
 
-    void deleteFromWatchedList(Integer id);
+    void deleteFromWatchedList(Long userId, Integer seriesId);
 
     void increaseWatchedEpisodes(Integer id);
 

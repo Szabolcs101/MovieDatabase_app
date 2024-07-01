@@ -7,19 +7,19 @@ public interface MovieService {
 
     List<Movie> getAllMovies();
 
-    List<Movie> getPlannedMovies();
+    List<Movie> getPlannedMovies(Long userId);
 
-    List<Movie> getCompletedMovies();
+    List<Movie> getCompletedMovies(Long userId);
 
     Movie getMovieById(Integer id);
 
-    void addToPlanningList(Integer id);
+    void addToPlanningList(Long userId, Integer movieId);
 
-    void deleteFromPlanningList(Integer id);
+    void deleteFromPlanningList(Long userId, Integer movieId);
 
-    void addToCompletedList(Integer id);
+    void addToCompletedList(Long userId, Integer movieId);
 
-    void deleteFromCompletedList(Integer id);
+    void deleteFromCompletedList(Long userId, Integer movieId);
 
     Movie createMovie(Movie movie);
 
